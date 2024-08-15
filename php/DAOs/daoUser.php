@@ -22,6 +22,13 @@ include(__DIR__ . '/../database/connection.php');
             return $this->pdo->lastInsertId();
         }
 
+        public function getAllUsers() {
+            $sql = "SELECT * FROM user";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
         public function getUserById($id_usuario) {
             $sql = "SELECT * FROM user WHERE id_usuario = :id_user";
             $stmt = $this->pdo->prepare($sql);
