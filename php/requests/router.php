@@ -17,7 +17,7 @@ if($method = "GET"){
         case '/':
             include HTML.'/index.html';
             break;
-        case '/getUser':
+        case '/getUserById':
             $args = [];
             parse_str($path["query"], $args);
             $user = $daoUser->getUserById($args["id"]);
@@ -32,7 +32,22 @@ if($method = "GET"){
                 echo $response;
             }
             break;
-        case '/getProducto':
+        case '/getUserByEmail':
+            $args = [];
+            parse_str($path["query"], $args);
+            $user = $daoUser->getUserByEmail($args["id"]);
+            header('Content-Type: application/json');
+            $response = json_encode($user);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                http_response_code(500);
+                $error = ["error" => "Failed to encode JSON"];
+                echo json_encode($error);
+            } else {
+                http_response_code(200);
+                echo $response;
+            }
+            break;
+        case '/getProductoById':
             $args = [];
             parse_str($path["query"], $args);
             $producto = $daoProducto->getProductoById($args["id"]);
@@ -47,7 +62,7 @@ if($method = "GET"){
                 echo $response;
             }
             break;
-        case '/getPedido':
+        case '/getPedidoById':
             $args = [];
             parse_str($path["query"], $args);
             $pedido = $daoPedido->getPedidoById($args["id"]);
@@ -101,6 +116,14 @@ if($method = "GET"){
                 echo $response;
             }
             break;
+    }
+}
+
+
+
+if($method = "POST"){
+    switch($path["path"]){
+        
     }
 }
 
