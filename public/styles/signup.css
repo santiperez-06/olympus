@@ -1,0 +1,58 @@
+
+.box{
+    color: white;
+    text-align: center;
+}
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  background-color: aquamarine;
+}
+.Contenedor{
+     width: 420px;
+     text-align: center;
+     background-color:rgb(48, 48, 241);
+     padding: 30px 40px;
+     border-radius: 10px;
+}
+.Contenedor h1 {
+    font-size: 36px;
+    text-align: center;
+    color: white;
+}
+.Contenedor p {
+    color: white;
+}
+.Link-SignUp {
+    text-align: center;
+}
+.Contenedor .boton {
+    background-color: rgb(125, 240, 240);
+    margin: 25px auto; 
+    padding: 5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block; 
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+header{
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  padding: 20px 100px;
+background-color: rgb(8, 60, 119);
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
