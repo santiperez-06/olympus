@@ -1,6 +1,6 @@
 <?php
 
-include(__DIR__.'/./connection.php');
+    include(__DIR__."/../database/connection.php");
 
     class ProductDAO {
 
