@@ -12,12 +12,12 @@ include(__DIR__ . '/../database/connection.php');
 
 
         public function createUser($nombre, $correo_electronico, $contrasena, $tipoUser){
-            $sql = "INSERT INTO user (nombre, correo, contraseña, tipo_de_usuario) VALUES (:nombre, :correo, :contraseña, :tipoUser)";
+            $sql = "INSERT INTO user (nombre, correo, password, tipo_de_usuario) VALUES (:nombre, :correo, :password, :tipoUser)";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([
                 ':nombre' => $nombre,
                 ':correo_electronico' => $correo_electronico,
-                ':contraseña' => password_hash($contrasena, PASSWORD_BCRYPT)
+                ':password' => password_hash($contrasena, PASSWORD_BCRYPT)
             ]);
             return $this->pdo->lastInsertId();
         }
@@ -26,7 +26,7 @@ include(__DIR__ . '/../database/connection.php');
             $sql = "SELECT * FROM user";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         public function getUserById($id_usuario) {
@@ -43,14 +43,14 @@ include(__DIR__ . '/../database/connection.php');
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
-        public function updateUser($id_usuario, $nombre, $correo, $contraseña) {
-            $sql = "UPDATE user SET nombre = :nombre, correo = :correo, contraseña = :contraseña WHERE id_usuario = :id_usuario";
+        public function updateUser($id_usuario, $nombre, $correo, $password) {
+            $sql = "UPDATE user SET nombre = :nombre, correo = :correo, password = :password WHERE id_usuario = :id_usuario";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([
                 ':id_user' => $id_usuario,
                 ':nombre' => $nombre,
                 ':correo' => $correo,
-                ':contraseña' => password_hash($contraseña, PASSWORD_BCRYPT)
+                ':password' => password_hash($password, PASSWORD_BCRYPT)
             ]);
             return $stmt->rowCount();
         }
