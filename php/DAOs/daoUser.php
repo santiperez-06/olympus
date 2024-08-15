@@ -36,11 +36,11 @@ include(__DIR__.'/./connection.php');
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
-        public function updateUser($id_user, $nombre, $correo, $contraseña) {
-            $sql = "UPDATE user SET nombre = :nombre, correo = :correo, contraseña = :contraseña WHERE id_user = :id_user";
+        public function updateUser($id_usuario, $nombre, $correo, $contraseña) {
+            $sql = "UPDATE user SET nombre = :nombre, correo = :correo, contraseña = :contraseña WHERE id_usuario = :id_usuario";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([
-                ':id_user' => $id_user,
+                ':id_user' => $id_usuario,
                 ':nombre' => $nombre,
                 ':correo' => $correo,
                 ':contraseña' => password_hash($contraseña, PASSWORD_BCRYPT)
@@ -48,10 +48,10 @@ include(__DIR__.'/./connection.php');
             return $stmt->rowCount();
         }
 
-        public function deleteUser($id_user) {
-            $sql = "DELETE FROM user WHERE id_user = :id_user";
+        public function deleteUser($id_usuario) {
+            $sql = "DELETE FROM user WHERE id_usuario = :id_usuario";
             $stmt = $this->pdo->prepare($sql);
-            $stmt->execute([':id_user' => $id_user]);
+            $stmt->execute([':id_user' => $id_usuario]);
             return $stmt->rowCount();
         }
 
