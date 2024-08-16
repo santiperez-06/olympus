@@ -3,38 +3,80 @@
     color: white;
     text-align: center;
 }
+
+head .logo{
+    background-image: url('/../../assets/logoPlaceholder.png');
+}
 body {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-  background-color: aquamarine;
+    background-color: rgb(255, 255, 255);
 }
+
+input{
+    width: 100%;
+    padding: 10px 15px;
+    background-blend-mode: white;
+    margin-bottom: 5px;
+    border: 2px solid grey;
+    border-radius: 5px;
+    transition-duration: 0.4s;
+}
+
+input:hover{
+    border: 2px solid black;
+}
+
+input:focus{
+    border: 2px solid black;
+}
+
 .Contenedor{
-     width: 420px;
-     text-align: center;
-     background-color:rgb(48, 48, 241);
+     background-color:rgb(216, 216, 216);
      padding: 30px 40px;
-     border-radius: 10px;
 }
+
+label{
+    font-family: "Moderustic", sans-serif;
+    margin-right: 0;
+}
+
 .Contenedor h1 {
     font-size: 36px;
-    text-align: center;
     color: white;
 }
+
 .Contenedor p {
     color: white;
 }
-.Link-SignUp {
-    text-align: center;
-}
+
 .Contenedor .boton {
-    background-color: rgb(125, 240, 240);
-    margin: 25px auto; 
-    padding: 5px;
+    background-color: rgb(0, 0, 0);
+    font-family: "Moderustic", sans-serif;
+    font-weight: 650;
+    border: none;
+    color: white;
+    font-size: 15px;
+    margin-top: 15px; 
+    margin-left: 15%;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 5px solid black;
     text-transform: uppercase;
     text-decoration: none;
-    display: inline-block; 
+    display: inline-block;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+
+.boton:hover{
+    color: black;
+    background-color: rgb(255, 255, 255);
 }
 
 *{
@@ -45,14 +87,14 @@ body {
 }
 
 header{
-  position: fixed;
-  top:0;
-  left:0;
-  width:100%;
-  padding: 20px 100px;
-background-color: rgb(8, 60, 119);
-display: flex;
-justify-content: space-between;
-align-items: center;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding: 20px 100px;
+    background-color: rgb(8, 60, 119);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
