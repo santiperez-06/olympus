@@ -5,7 +5,7 @@
 }
 
 head .logo{
-    background-image: url('/../../assets/logoPlaceholder.png');
+    background-image: src('/../../assets/logoPlaceholder.png');
 }
 body {
     display: flex;
@@ -92,7 +92,8 @@ header{
     left:0;
     width:100%;
     padding: 20px 100px;
-    background-color: rgb(8, 60, 119);
+    background-color: white;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     display: flex;
     justify-content: space-between;
     align-items: center;
