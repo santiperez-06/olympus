@@ -57,12 +57,33 @@
     
         // Eliminar un pedido
         public function deletePedido($id_pedido) {
-            $sql = "DELETE FROM pedido WHERE id_pedido = :id_pedido";
-            $stmt = $this->pdo->prepare($sql);
+            $deletePedidoProducto = "DELETE FROM pedido_producto WHERE id_pedido = :id_pedido";
+            $stmt = $this->pdo->prepare($deletePedidoProducto);
             $stmt->execute([':id_pedido' => $id_pedido]);
-            return $stmt->rowCount();
+            
+            $deletePedido = "DELETE FROM pedido WHERE id_pedido = :id_pedido";
+            $stmt2 = $this->pdo->prepare($deletePedido);
+            $stmt2->execute([':id_pedido' => $id_pedido]);
+            return $stmt2->rowCount() + $stmt->rowCount();
         }
         
+        public function sumarProducto($id_pedido, $id_producto, $cantidad){
+            $sql = "INSERT INTO pedido_producto (id_pedido, id_producto, cantidad) VALUES (:id_pedido, :id_producto, :cantidad)";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([
+                ':id_pedido'=>$id_pedido,
+                ':id_producto'=>$id_producto,
+                ':cantidad'=>$cantidad
+            ]);
+            return $stmt->rowCount();
+        }
+
+        public function quitarProducto($id_pedido, $id_producto){
+            $sql = "DELETE FROM pedido_producto WHERE id_pedido = :id_pedido AND id_producto = :id_producto";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([':id_pedido' => $id_pedido, ':id_producto' => $id_producto]);
+            return $stmt->rowCount();
+        }
     }
 
 ?>
