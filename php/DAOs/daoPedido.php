@@ -64,7 +64,7 @@
             $deletePedido = "DELETE FROM pedido WHERE id_pedido = :id_pedido";
             $stmt2 = $this->pdo->prepare($deletePedido);
             $stmt2->execute([':id_pedido' => $id_pedido]);
-            return $stmt->rowCount() + $stmt->rowCount();
+            return $stmt2->rowCount() + $stmt->rowCount();
         }
         
         public function sumarProducto($id_pedido, $id_producto, $cantidad){
