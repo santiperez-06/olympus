@@ -104,7 +104,7 @@ if($method === "POST"){
         case 'userLogin':
             
             break;
-        case 'userRegister':
+        case 'userRegister':   
             break;
     }
 }

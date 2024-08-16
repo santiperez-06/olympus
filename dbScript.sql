@@ -53,8 +53,10 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `olympus`.`producto` (
   `id_producto` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NOT NULL,
   `precio` DECIMAL(10,2) NOT NULL,
-  `descripcion` VARCHAR(45) NOT NULL,
+  `descripcion` VARCHAR(255) NOT NULL,
+  `imagenes` VARCHAR(511) NOT NULL,
   `stock` INT NOT NULL,
   PRIMARY KEY (`id_producto`))
 ENGINE = InnoDB

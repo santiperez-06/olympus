@@ -9,7 +9,7 @@
         public function __construct($pdo){
             $this->pdo = $pdo;
         }
-        //TODO añadir campos de nombre e imagenes
+
         public function createProducto($precio, $descripcion, $stock) {
             $sql = "INSERT INTO producto (precio, descripcion, stock) 
                     VALUES (:precio, :descripcion, :stock)";
