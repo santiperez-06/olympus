@@ -92,9 +92,9 @@ if($method === "POST"){
             validateJson($response);
             break;
         case '/crearPedido':
-
-
-
+            $pedido = json_decode($requestBody);
+            $response = $daoPedido->createPedido($pedido->id_usuario, $pedido->fecha_pendiente, $pedido->fecha_entregado, $pedido->estado);
+            validateJson($response);
             break;
         case '/crearProducto':
             $producto = json_decode($requestBody);
