@@ -11,13 +11,14 @@ include(__DIR__ . '/../database/connection.php');
         }
 
 
-        public function createUser($nombre, $correo_electronico, $contrasena, $tipoUser){
-            $sql = "INSERT INTO user (nombre, correo, password, tipo_de_usuario) VALUES (:nombre, :correo, :password, :tipoUser)";
+        public function createUser($nombre, $correo, $contrasena, $tipo_de_usuario){
+            $sql = "INSERT INTO user (nombre, correo, password, tipo_de_usuario) VALUES (:nombre, :correo, :password, :tipo_de_usuario)";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([
                 ':nombre' => $nombre,
-                ':correo_electronico' => $correo_electronico,
-                ':password' => password_hash($contrasena, PASSWORD_BCRYPT)
+                ':correo' => $correo,
+                ':password' => password_hash($contrasena, PASSWORD_BCRYPT),
+                ':tipo_de_usuario' => $tipo_de_usuario
             ]);
             return $this->pdo->lastInsertId();
         }
@@ -58,7 +59,7 @@ include(__DIR__ . '/../database/connection.php');
         public function deleteUser($id_usuario) {
             $sql = "DELETE FROM user WHERE id_usuario = :id_usuario";
             $stmt = $this->pdo->prepare($sql);
-            $stmt->execute([':id_user' => $id_usuario]);
+            $stmt->execute([':id_usuario' => $id_usuario]);
             return $stmt->rowCount();
         }
 
