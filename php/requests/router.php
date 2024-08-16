@@ -85,44 +85,69 @@ if($method === "GET"){
 
 if($method === "POST"){
     $requestBody = file_get_contents('php://input');
-    switch($path["path"]){ //Acá listadas en el switch todas las direcciones que usen GET
-        case '/crearUser':
+    switch($path["path"]){ //Acá listadas en el switch todas las direcciones que usen POST
+        case '/createUser':
             $user = json_decode($requestBody);
             $response = $daoUser->createUser($user->nombre, $user->correo, $user->password, $user->tipo_de_usuario);
             validateJson($response);
             break;
-        case '/crearPedido':
+        case '/createPedido':
             $pedido = json_decode($requestBody);
             $response = $daoPedido->createPedido($pedido->id_usuario, $pedido->fecha_pendiente, $pedido->fecha_entregado, $pedido->estado);
             validateJson($response);
             break;
-        case '/crearProducto':
+        case '/createProducto':
             $producto = json_decode($requestBody);
             $response = $daoProducto->createProducto($producto->precio, $producto->descripcion, $producto->stock);
+            validateJson($response);
+            break;
+        case 'userLogin':
+            
+            break;
+        case 'userRegister':
+            break;
+    }
+}
+
+if($method === "PUT"){
+    $requestBody = file_get_contents('php://input');
+    switch($path["path"]){ //Acá listadas en el switch todas las direcciones que usen PUT
+        case '/updateUser':
+            $user = json_decode($requestBody);
+            $response = $daoUser->updateUser($user->id, $user->nombre, $user->correo, $user->password);
+            validateJson($response);
+            break;
+        case '/updatePedido':
+            $pedido = json_decode($requestBody);
+            $response = $daoPedido->updatePedido($pedido->id, $pedido->fecha_pendiente, $pedido->fecha_entregado, $pedido->estado);
+            validateJson($response);
+            break;
+        case '/updateProducto':
+            $producto = json_decode($requestBody);
+            $response = $daoProducto->updateProducto($producto->id, $producto->precio, $producto->descripcion, $producto->stock);
             validateJson($response);
             break;
     }
 }
 
-
 if($method === "DELETE"){
     $requestBody = file_get_contents('php://input');
-    switch($path["path"]){
-        case '/borrarUser':
+    switch($path["path"]){ //Acá listadas en el switch todas las direcciones que usen DELETE
+        case '/deleteUser':
             $args = [];
             parse_str($path["query"], $args);
             $user = $daoUser->deleteUser($args["id"]);
             $response = json_encode($user);
             validateJson($response);
             break;
-        case '/borrarPedido':
+        case '/deletePedido':
             $args = [];
             parse_str($path["query"], $args);
             $pedido = $daoPedido->deletePedido($args["id"]);
             $response = json_encode($pedido);
             validateJson($response);
             break;
-        case '/borrarProducto':
+        case '/deleteProducto':
             $args = [];
             parse_str($path["query"], $args);
             $producto = $daoProducto->deleteProducto($args["id"]);

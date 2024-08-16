@@ -48,7 +48,7 @@ include(__DIR__ . '/../database/connection.php');
             $sql = "UPDATE user SET nombre = :nombre, correo = :correo, password = :password WHERE id_usuario = :id_usuario";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([
-                ':id_user' => $id_usuario,
+                ':id_usuario' => $id_usuario,
                 ':nombre' => $nombre,
                 ':correo' => $correo,
                 ':password' => password_hash($password, PASSWORD_BCRYPT)
