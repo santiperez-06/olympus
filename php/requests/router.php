@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 include(__DIR__."/../DAOs/daoPedido.php");
 include(__DIR__."/../DAOs/daoProducto.php");
@@ -13,6 +14,13 @@ $daoPedido = new PedidoDAO($pdo);
 $daoProducto = new ProductDAO($pdo);
 $daoUser = new UserDAO($pdo);
 
+function checkIfLoggedIn(){
+    if (!(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true)){
+        header('Location: /login');
+        exit;
+    }
+}
+
 function validateJson($response){
     if (json_last_error() !== JSON_ERROR_NONE) {
         http_response_code(500);
@@ -24,11 +32,23 @@ function validateJson($response){
     }
 }
 
+if (file_exists($path["path"]) && is_file($path["path"])) {
+    return false; 
+}
+
 if($method === "GET"){ 
     switch($path["path"]){ //Acá listadas en el switch todas las direcciones que usen GET
-        case '/':
-            include HTML.'/index.html';
+        case '/login':
+            include HTML.'/login.html';
+            exit;
             break;
+        case '/productos':
+            
+
+            break;
+        case '/logoff':
+            break;
+        //Requests BD    
         case '/getUserById':
             $args = [];
             parse_str($path["query"], $args);
@@ -79,6 +99,8 @@ if($method === "GET"){
             $response = json_encode($productos);
             validateJson($response);
             break;
+        default:
+            return false;
     }
 }
 
@@ -101,10 +123,10 @@ if($method === "POST"){
             $response = $daoProducto->createProducto($producto->precio, $producto->descripcion, $producto->stock);
             validateJson($response);
             break;
-        case 'userLogin':
+        case '/userLogin':
             
             break;
-        case 'userRegister':   
+        case '/userRegister':   
             break;
     }
 }

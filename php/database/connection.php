@@ -30,3 +30,4 @@
     }
 
 ?>
+//TODO mover la conexion a la ejecucion de cada metodo del DAO, para que no aparezca el echo en el html, que se pueda cerrar la conexion después de usarla y no empezar una conexión distinta para cada DAO
