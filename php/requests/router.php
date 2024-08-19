@@ -102,10 +102,18 @@ if($method === "POST"){
             validateJson($response);
             break;
         case 'userLogin':
-            
+            $userRequest = json_decode($requestBody);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                http_response_code(500);
+                $error = ["error" => "Failed to encode JSON"];
+                echo json_encode($error);
+            } else {
+                http_response_code(200);
+                //
+            }
             break;
         case 'userRegister':
-              
+
             break;
     }
 }
