@@ -7,14 +7,6 @@
           <link rel="stylesheet" href="/../../public/styles/signup.css">
           <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
           <link href="https://fonts.googleapis.com/css2?family=Moderustic:wght@300..800&display=swap" rel="stylesheet">
-          <style>
-            body {
-              background-image: url('./imagenes/humo-azul-abstracto-fondo-negro_36326-3337.png');
-              background-size: cover; /* Ajusta la imagen para cubrir el área */
-              background-position: center; /* Centra la imagen */
-              background-repeat: no-repeat; /* Evita que la imagen se repita */
-            }
-          </style>
 </head>
 
 <body>
@@ -31,26 +23,25 @@
     <form action="router.php" method="POST">
       <label for="name">Nombre de Usuario:</label>
       <div class="box"> 
-        <input type="text" required></input> 
+        <input type="text" name="user" required></input> 
       </div>
       <label for="email">Correo electrónico:</label>
       <div class="box"> 
-       <input type="text" required></input> 
+       <input type="text" name="email" required></input> 
       </div>
       <label for="password">Contraseña:</label>
       <div class="box"> 
-        <input type="text" required></input> 
+        <input type="text" name="pass" required></input> 
       </div>
       <label for="repeatPass">Repetir Contraseña:</label>
       <div class="box"> 
         <input type="text" required></input> 
       </div>
         <input class="boton" type="submit" value="Registrarse">
+        <div class="Link-Login">
+          <p>¿Ya tenes una cuenta creada? <a href="login.html">Ingresa acá 
+       </a> </p>
     </form> 
   </div>
 </body>
 </html>
-
-
-
-
