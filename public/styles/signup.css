@@ -1,11 +1,10 @@
-
 .box{
     color: white;
     text-align: center;
 }
 
 head .logo{
-    background-image: url('/../../assets/logoPlaceholder.png');
+    background-image: src('/../../assets/logoPlaceholder.png');
 }
 body {
     display: flex;
@@ -49,7 +48,7 @@ label{
 }
 
 .Contenedor p {
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 .Contenedor .boton {
@@ -59,8 +58,7 @@ label{
     border: none;
     color: white;
     font-size: 15px;
-    margin-top: 15px; 
-    margin-left: 15%;
+    margin-top: 15px;
     padding-left: 15px;
     padding-right: 15px;
     padding-top: 5px;
@@ -69,7 +67,7 @@ label{
     text-transform: uppercase;
     text-decoration: none;
     display: inline-block;
-    transition-duration: 0.4s;
+    transition-duration: 0.3s;
     cursor: pointer;
 }
 
@@ -83,18 +81,7 @@ label{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Moderustic', sans-serif;
 }
 
-header{
-    position: fixed;
-    top:0;
-    left:0;
-    width:100%;
-    padding: 20px 100px;
-    background-color: rgb(8, 60, 119);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
