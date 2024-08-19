@@ -43,10 +43,14 @@ if($method === "GET"){
             exit;
             break;
         case '/productos':
-            
-
+            include HTML.'/productos.html';
+            var_dump($_SESSION);
+            exit;
             break;
-        case '/logoff':
+        case '/logout':
+            session_unset();
+            session_destroy();
+            checkIfLoggedIn();
             break;
         //Requests BD    
         case '/getUserById':
@@ -60,7 +64,7 @@ if($method === "GET"){
         case '/getUserByEmail':
             $args = [];
             parse_str($path["query"], $args);
-            $user = $daoUser->getUserByEmail($args["id"]);
+            $user = $daoUser->getUserByEmail($args["email"]);
             header('Content-Type: application/json');
             $response = json_encode($user);
             validateJson($response);
@@ -124,18 +128,31 @@ if($method === "POST"){
             validateJson($response);
             break;
         case '/userLogin':
-            $userRequest = json_decode($requestBody);
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                http_response_code(500);
-                $error = ["error" => "Failed to encode JSON"];
-                echo json_encode($error);
-            } else {
-                http_response_code(200);
-                //
+            $userRequest = $_POST;
+            $user = $daoUser->getUserByEmail($userRequest["email"]);  
+            $passwordOK = password_verify($userRequest["password"], $user["password"]);   
+
+            validateJson('');
+            if(!$passwordOK){
+                http_response_code(401);
+                exit;
+            }
+            else{
+                $_SESSION['logged_in'] = true;
+                $_SESSION['user'] = $user["nombre"];
+                $_SESSION['correo'] = $user["correo"];
+                $_SESSION['tipo_sesion'] = $user["tipo_de_usuario"];
+                header('Location: /productos');
+                exit;
             }
             break;
-        case '/userRegister':   
+        case '/userRegister': 
+            $user = $_POST;
+            $response = $daoUser->createUser($user["nombre"], $user["correo"], $user["password"], $user["tipo_de_usuario"]);
+            validateJson($response); 
             break;
+        default:
+            http_response_code(404);
     }
 }
 

@@ -23,11 +23,11 @@
         // Configurar el manejo de errores de PDO
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        echo "Connected successfully\n";
+        //echo "Connected successfully\n";
     } catch (PDOException $e) {
         // Manejar el error en caso de fallo de conexión
         die("Connection failed: " . $e->getMessage());
     }
 
+    //TODO mover la conexion a la ejecucion de cada metodo del DAO, para que no aparezca el echo en el html, que se pueda cerrar la conexion después de usarla y no empezar una conexión distinta para cada DAO
 ?>
-//TODO mover la conexion a la ejecucion de cada metodo del DAO, para que no aparezca el echo en el html, que se pueda cerrar la conexion después de usarla y no empezar una conexión distinta para cada DAO
