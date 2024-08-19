@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
     <title>Iniciar Sesión</title>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="/public/styles/login.css">
+    <link rel="stylesheet" href="/../public/styles/login.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel = "stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Moderustic:wght@300..800&display=swap" rel="stylesheet">
     <style>
         body {
             background-image: url('./imagenes/humo-azul-abstracto-fondo-negro_36326-3337.png');
@@ -19,32 +19,32 @@
 </head>
 
 <body>
-<header>
-    <H2 class="logo">Logo</H2>
-    <nav class="nav">
-        <a href="#">Home</a>
-        <a href="#">servicios</a>
-        <a href="#">sobre nosotros</a>
-        <a href="#">contacto</a>
-    </nav>
-    <button class="sas+" >a</button>
-</header>
+    <header>
+        <link rel="stylesheet" href="/../../public/styles/header.css">
+        <div class = "logo">
+          <img src="/../../assets/logoPlaceholder.png" style="width: 20%;height: 20%;">
+        </div>
+        <img src="/../../assets/profilePlaceholder.png" style="width: 2%;height: 2%;">
+      </header>
+
     <div class="Contenedor">
-        <form action="">
-    <h1>Login</h1>
-  <div class="box"> 
-   <input type="text" placeholder="Usuario" required><i class='bx bxs-user'></i></input> 
-  </div>
-  <div class="box"> 
-    <input type="password" placeholder="Contraseña" required><i class='bx bxs-key'></i></input> 
-   </div>
-   <a class ="boton" href = "Productos.html">Entrar</a>
-   <div class="Link-SignUp">
-    <p>No tiene una cuenta tio? <a href="SignUp.html">Registrate 
-    </a> </p>
-   </div>
-</form> 
-</div>
+        <form action="/userLogin" module="POST">
+            <div class="box"> 
+                <label for="email">Correo electrónico:</label>
+                <input type="text" placeholder="Usuario" required></input> 
+            </div>
+            <div class="box"> 
+                <label for="password">Contraseña:</label>
+                <input type="password" placeholder="Contraseña" required></input> 
+            </div>
+            <input class="boton" type="submit" value="Iniciar Sesión">
+            <div class="Link-SignUp">
+               <p>¿No tenes una cuenta todavía? <a href="SignUp.html">Registrate 
+            </a> </p>
+            </div>
+        </form> 
+    </div>
+
 </body>
 </html>
 
