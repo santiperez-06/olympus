@@ -6,7 +6,7 @@ include(__DIR__."/../DAOs/daoProducto.php");
 include(__DIR__."/../DAOs/daoUser.php");
 
 define("HTML", __DIR__."/../../src/views");
-define("CSS", __DIR__."/../../public/styles");
+//define("CSS", __DIR__."/../../public/styles");
 $path = parse_url($_SERVER["REQUEST_URI"]);
 $method = $_SERVER["REQUEST_METHOD"];
 
@@ -20,7 +20,15 @@ function checkIfLoggedIn(){
         exit;
     }
 }
-
+function checkIfAdminPerms(){
+    if (!isset($_SESSION['tipo_sesion']) || !($_SESSION['tipo_sesion'] === 'admin')){
+        http_response_code(403);
+        exit;
+    }
+    else{
+        return true;
+    }
+}
 function validateJson($response){
     if (json_last_error() !== JSON_ERROR_NONE) {
         http_response_code(500);
@@ -32,21 +40,45 @@ function validateJson($response){
     }
 }
 
-if (file_exists($path["path"]) && is_file($path["path"])) {
+if (file_exists(__DIR__.'/../../'.$path["path"]) && is_file(__DIR__.'/../../'.$path["path"])) {
     return false; 
 }
 
 if($method === "GET"){ 
     switch($path["path"]){ //Acá listadas en el switch todas las direcciones que usen GET
-        case '/login':
-            include HTML.'/login.html';
+        case '/':
+            include HTML.'/productos.html';
             exit;
             break;
         case '/productos':
             include HTML.'/productos.html';
-            var_dump($_SESSION);
             exit;
             break;
+        case '/login':
+            include HTML.'/login.html';
+            include HTML.'/loginfailed.html';
+            exit;
+            break;
+        case '/admin':
+            checkIfLoggedIn();
+            if(checkIfAdminPerms()){
+                include HTML.'/admin.html';
+            }
+            break;
+        case '/product':
+            checkIfLoggedIn();
+            include HTML.'/product.html';
+            exit;
+            break;
+        case '/profile':
+            checkIfLoggedIn();
+            include HTML.'/profile.html';
+            exit;
+            break;
+        case '/signup':
+            include HTML.'/signup.html';
+            exit;
+            break;                
         case '/logout':
             session_unset();
             session_destroy();
@@ -104,7 +136,7 @@ if($method === "GET"){
             validateJson($response);
             break;
         default:
-            return false;
+            http_response_code(404);
     }
 }
 
@@ -130,11 +162,11 @@ if($method === "POST"){
         case '/userLogin':
             $userRequest = $_POST;
             $user = $daoUser->getUserByEmail($userRequest["email"]);  
-            $passwordOK = password_verify($userRequest["password"], $user["password"]);   
+            $passwordOK = $user ?? password_verify($userRequest["password"], $user["password"]);   
 
             validateJson('');
             if(!$passwordOK){
-                http_response_code(401);
+                header('Location: /login?loginfailed=true');
                 exit;
             }
             else{
@@ -146,10 +178,16 @@ if($method === "POST"){
                 exit;
             }
             break;
-        case '/userRegister': 
-            $user = $_POST;
-            $response = $daoUser->createUser($user["nombre"], $user["correo"], $user["password"], $user["tipo_de_usuario"]);
-            validateJson($response); 
+        case '/userSignup': 
+            $request = $_POST;
+            $user = $daoUser->createUser($request["nombre"], $request["correo"], $request["password"], 'client');
+            validateJson('');
+            $_SESSION['logged_in'] = true;
+            $_SESSION['user'] = $request["nombre"];
+            $_SESSION['correo'] = $request["correo"];
+            $_SESSION['tipo_sesion'] = $request["tipo_de_usuario"];
+            header('Location: /productos');
+            exit;
             break;
         default:
             http_response_code(404);
@@ -174,6 +212,8 @@ if($method === "PUT"){
             $response = $daoProducto->updateProducto($producto->id, $producto->precio, $producto->descripcion, $producto->stock);
             validateJson($response);
             break;
+        default:
+            http_response_code(404);
     }
 }
 
@@ -201,6 +241,8 @@ if($method === "DELETE"){
             $response = json_encode($producto);
             validateJson($response);
             break;
+        default:
+            http_response_code(404);
     }
 }
 
