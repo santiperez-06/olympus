@@ -1,15 +1,3 @@
-header{
-	position: fixed;
-	top:0;
-	left:0;
-	width:100%;
-	padding: 20px 100px;
-  background-color: rgb(8, 60, 119);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  }
-  
 body {
    
     align-items: center;
