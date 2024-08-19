@@ -59,8 +59,7 @@ label{
     border: none;
     color: white;
     font-size: 15px;
-    margin-top: 15px; 
-    margin-left: 15%;
+    margin-top: 15px;
     padding-left: 15px;
     padding-right: 15px;
     padding-top: 5px;
@@ -69,7 +68,7 @@ label{
     text-transform: uppercase;
     text-decoration: none;
     display: inline-block;
-    transition-duration: 0.4s;
+    transition-duration: 0.3s;
     cursor: pointer;
 }
 

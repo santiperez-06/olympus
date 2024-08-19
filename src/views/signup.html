@@ -21,13 +21,14 @@
 
   <header>
     <link rel="stylesheet" href="/../../public/styles/header.css">
-    <img src="/../../assets/logoPlaceholder.png" style="width: 5%;height: 5%;">
-    
+    <div class = "logo">
+      <img src="/../../assets/logoPlaceholder.png" style="width: 20%;height: 20%;">
+    </div>
     <img src="/../../assets/profilePlaceholder.png" style="width: 2%;height: 2%;">
   </header>
     
   <div class="Contenedor">
-    <form action="">
+    <form action="router.php" method="POST">
       <label for="name">Nombre de Usuario:</label>
       <div class="box"> 
         <input type="text" required></input> 
@@ -44,7 +45,7 @@
       <div class="box"> 
         <input type="text" required></input> 
       </div>
-        <button class ="boton" href = "Login.html">Registrarse</button>
+        <input class="boton" type="submit" value="Registrarse">
     </form> 
   </div>
 </body>
