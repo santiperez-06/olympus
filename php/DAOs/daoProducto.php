@@ -1,65 +1,72 @@
 <?php
 
-    include(__DIR__."/../database/connection.php");
-
     class ProductDAO {
 
-        private $pdo;
-
-        public function __construct($pdo){
-            $this->pdo = $pdo;
-        }
-
         public function createProducto($precio, $descripcion, $stock) {
+            include(__DIR__."/../database/connection.php");
             $sql = "INSERT INTO producto (precio, descripcion, stock) 
                     VALUES (:precio, :descripcion, :stock)";
-            $stmt = $this->pdo->prepare($sql);
+            $stmt = $pdo->prepare($sql);
             $stmt->execute([
                 ':precio' => $precio,
                 ':descripcion' => $descripcion,
                 ':stock' => $stock
             ]);
-            return $this->pdo->lastInsertId();
+            $response = $pdo->lastInsertId();
+            $pdo = null;
+            return $response;
         }
     
         // Obtener un producto por ID
         public function getProductoById($id_producto) {
+            include(__DIR__."/../database/connection.php");
             $sql = "SELECT * FROM producto WHERE id_producto = :id_producto";
-            $stmt = $this->pdo->prepare($sql);
+            $stmt = $pdo->prepare($sql);
             $stmt->execute([':id_producto' => $id_producto]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            $response = $stmt->fetch(PDO::FETCH_ASSOC);
+            $pdo = null;
+            return $response;
         }
     
         // Obtener todos los productos
         public function getAllProductos() {
+            include(__DIR__."/../database/connection.php");
             $sql = "SELECT * FROM producto";
-            $stmt = $this->pdo->query($sql);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $stmt = $pdo->query($sql);
+            $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $pdo = null;
+            return $response;
         }
     
         // Actualizar un producto
         public function updateProducto($id_producto, $precio, $descripcion, $stock) {
+            include(__DIR__."/../database/connection.php");
             $sql = "UPDATE producto SET 
                     precio = :precio, 
                     descripcion = :descripcion, 
                     stock = :stock 
                     WHERE id_producto = :id_producto";
-            $stmt = $this->pdo->prepare($sql);
+            $stmt = $pdo->prepare($sql);
             $stmt->execute([
                 ':id_producto' => $id_producto,
                 ':precio' => $precio,
                 ':descripcion' => $descripcion,
                 ':stock' => $stock
             ]);
-            return $stmt->rowCount();
+            $response = $stmt->rowCount();
+            $pdo = null;
+            return $response;
         }
     
         // Eliminar un producto
         public function deleteProducto($id_producto) {
+            include(__DIR__."/../database/connection.php");
             $sql = "DELETE FROM producto WHERE id_producto = :id_producto";
-            $stmt = $this->pdo->prepare($sql);
+            $stmt = $pdo->prepare($sql);
             $stmt->execute([':id_producto' => $id_producto]);
-            return $stmt->rowCount();
+            $response = $stmt->rowCount();
+            $pdo = null;
+            return $response;
         }
     }
 

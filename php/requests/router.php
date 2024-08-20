@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 include(__DIR__."/../DAOs/daoPedido.php");
 include(__DIR__."/../DAOs/daoProducto.php");
 include(__DIR__."/../DAOs/daoUser.php");
@@ -10,9 +9,9 @@ define("HTML", __DIR__."/../../src/views");
 $path = parse_url($_SERVER["REQUEST_URI"]);
 $method = $_SERVER["REQUEST_METHOD"];
 
-$daoPedido = new PedidoDAO($pdo);
-$daoProducto = new ProductDAO($pdo);
-$daoUser = new UserDAO($pdo);
+$daoPedido = new PedidoDAO();
+$daoProducto = new ProductDAO();
+$daoUser = new UserDAO();
 
 function checkIfLoggedIn(){
     if (!(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true)){
@@ -55,8 +54,12 @@ if($method === "GET"){
             exit;
             break;
         case '/login':
+            $args = [];
+            parse_str($path["query"], $args);
             include HTML.'/login.html';
-            include HTML.'/loginfailed.html';
+            if(isset($args) && $args["loginfailed"] === "true"){
+                include HTML.'/loginfailed.html';
+            }
             exit;
             break;
         case '/admin':
