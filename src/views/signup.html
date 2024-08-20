@@ -20,22 +20,22 @@
   </header>
     
   <div class="Contenedor">
-    <form action="/userRegister" method="POST">
-      <label for="name">Nombre de Usuario:</label>
+    <form action="/userSignup" method="POST">
+      <label for="nombre">Nombre de Usuario:</label>
       <div class="box"> 
-        <input type="text" name="user" required></input> 
+        <input type="text" name="nombre" required></input> 
       </div>
-      <label for="email">Correo electrónico:</label>
+      <label for="correo">Correo electrónico:</label>
       <div class="box"> 
-       <input type="text" name="email" required></input> 
+       <input type="text" name="correo" required></input> 
       </div>
       <label for="password">Contraseña:</label>
       <div class="box"> 
-        <input type="text" name="pass" required></input> 
+        <input type="text" name="password" required></input> 
       </div>
       <label for="repeatPass">Repetir Contraseña:</label>
       <div class="box"> 
-        <input type="text" required></input> 
+        <input type="text" required name = "repeatPass"></input> 
       </div>
         <input class="boton" type="submit" value="Registrarse">
         <div class="Link-Login">
